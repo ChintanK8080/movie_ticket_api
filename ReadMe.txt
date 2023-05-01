@@ -1,40 +1,17 @@
-Required Packages 
+# import the necessary libraries
+import tkinter as tk
 
-Package               Version
---------------------- -------
-asgiref               3.6.0
-attrs                 23.1.0
-autobahn              23.1.2
-Automat               22.10.0
-cffi                  1.15.1
-channels              4.0.0
-constantly            15.1.0
-cryptography          40.0.2
-daphne                4.0.0
-Django                4.2
-django-cors-headers   3.14.0
-django-filter         23.1
-django-rest-framework 0.1.0
-djangorestframework   3.14.0
-h2                    4.1.0
-hpack                 4.0.0
-hyperframe            6.0.1
-hyperlink             21.0.0
-idna                  3.4
-incremental           22.10.0
-Pillow                9.5.0
-pip                   22.2
-priority              1.3.0
-pyasn1                0.5.0
-pyasn1-modules        0.3.0
-pycparser             2.21
-pyOpenSSL             23.1.1
-pytz                  2023.3
-service-identity      21.1.0
-setuptools            59.6.0
-six                   1.16.0
-sqlparse              0.4.4
-Twisted               22.10.0
-txaio                 23.1.1
-typing_extensions     4.5.0
-zope.interface        6.0
+# create the main window
+root = tk.Tk()
+
+# set the window title
+root.title("My GUI App")
+
+# create a label widget
+label = tk.Label(root, text="Hello World!")
+
+# add the label widget to the window
+label.pack()
+
+# run the main event loop
+root.mainloop()
