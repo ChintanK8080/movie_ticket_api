@@ -1,14 +1,26 @@
 from rest_framework import serializers
-from .models import User, Show, Ticket, Seat,Movie
+from .models import  Show, Ticket, Seat,Movie
+from django.contrib.auth.models import User
 
+
+
+# User Serializer
 class UserSerializer(serializers.ModelSerializer):
     class Meta:
         model = User
-        fields = ('user_id', 'user_name', 'email_id', 'password')
+        fields = ('id', 'username', 'email')
+
+# Register Serializer
+class RegisterSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = User
+        fields = ('id', 'username', 'email', 'password')
         extra_kwargs = {'password': {'write_only': True}}
 
+    def create(self, validated_data):
+        user = User.objects.create_user(validated_data['username'], validated_data['email'], validated_data['password'])
 
-
+        return user
 class MovieSerializer(serializers.ModelSerializer):
     class Meta:
         model = Movie
@@ -25,7 +37,7 @@ class ShowSerializer(serializers.ModelSerializer):
         fields = ('show_id', 'time_started', 'time_ended','price','movie')
 
 class TicketSerializer(serializers.ModelSerializer):
-    user = UserSerializer(read_only=True, source='user_id')
+    user = UserSerializer(read_only=True, source='id')
     show = ShowSerializer(read_only=True, source='show_id')
 
     class Meta:
@@ -33,7 +45,7 @@ class TicketSerializer(serializers.ModelSerializer):
         fields = ('ticket_id', 'user', 'show', 'is_booked')
 
 class SeatSerializer(serializers.ModelSerializer):
-    user = UserSerializer(read_only=True,source='user_id')
+    user = UserSerializer(read_only=True,source='id')
     show = ShowSerializer(read_only=True,source='show_id')
     class Meta:
         model = Seat

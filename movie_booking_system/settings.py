@@ -22,9 +22,9 @@ INSTALLED_APPS = [
     'rest_framework',
     'rest_framework.authtoken',
     'home',
+    'knox',
     'channels',
 ]
-
 
 
 MIDDLEWARE = [
@@ -62,13 +62,24 @@ ROOT_URLCONF = 'movie_booking_system.urls'
 WSGI_APPLICATION = 'movie_booking_system.wsgi.application'
 
 DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+  'default': {
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': 'mydb',
+        'USER': 'postgres',
+        'PASSWORD': 'Chintan@1437',
+        'HOST': 'localhost',
+        'PORT': '5432',
     }
 }
 
-
+REST_FRAMEWORK = {
+    'DEFAULT_AUTHENTICATION_CLASSES': [
+        'knox.auth.TokenAuthentication',
+    ],
+     'DEFAULT_PERMISSION_CLASSES': [
+        'rest_framework.permissions.IsAuthenticated',
+    ],
+}
 
 AUTH_PASSWORD_VALIDATORS = [
     {

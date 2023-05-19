@@ -1,6 +1,6 @@
 from django.contrib import admin
 from django.urls import path, include
-from home import urls ,routing
+from home import urls, routing
 from django.conf import settings
 from django.conf.urls.static import static
 

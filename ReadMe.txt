@@ -15,3 +15,5 @@ label.pack()
 
 # run the main event loop
 root.mainloop()
+
+djangorestframework-simplejwt

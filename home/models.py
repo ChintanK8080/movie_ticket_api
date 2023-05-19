@@ -1,14 +1,7 @@
 from django.db import models
 from django.core.validators import MaxValueValidator
+from django.contrib.auth.models import User
 
-
-class User(models.Model):
-    user_id = models.AutoField(primary_key=True)
-    user_name = models.CharField(max_length=255)
-    email_id = models.EmailField(unique=True)
-    password = models.CharField(max_length=255)
-    def __str__(self):
-        return self.user_name
 
 class Movie(models.Model):
     movie_id = models.AutoField(primary_key=True)
@@ -30,7 +23,7 @@ class Show(models.Model):
 
 class Ticket(models.Model):
     ticket_id = models.AutoField(primary_key=True)
-    user_id = models.ForeignKey(User, on_delete=models.CASCADE)
+    id = models.ForeignKey(User, on_delete=models.CASCADE)
     show_id = models.ForeignKey(Show, on_delete=models.CASCADE)  
     is_booked = models.BooleanField(default=False)
     def __str__(self):
@@ -39,7 +32,7 @@ class Ticket(models.Model):
 class Seat(models.Model):
     seat_id = models.AutoField(primary_key=True)
     show_id = models.ForeignKey(Show, on_delete=models.CASCADE)
-    user_id = models.ForeignKey(User, on_delete=models.CASCADE) 
+    id = models.ForeignKey(User, on_delete=models.CASCADE) 
     seat_number = models.IntegerField(validators=[MaxValueValidator(300)],null=False,default=0)
 
     def __str__(self):
